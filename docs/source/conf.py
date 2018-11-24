@@ -16,6 +16,14 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
+# ext markdown
+from recommonmark.parser import CommonMarkParser
+from recommonmark.transform import AutoStructify
+
+source_parsers = {
+    '.md': CommonMarkParser,
+}
+source_suffix = ['.rst', '.md']
 
 # -- Project information -----------------------------------------------------
 

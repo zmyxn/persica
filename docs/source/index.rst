@@ -8,8 +8,9 @@ Welcome to persica-cookbook's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
+   Overview
+   development
    hello
 
 Indices and tables
