@@ -3,9 +3,6 @@
 Welcome to persica-cookbook's documentation!
 ============================================
 
-
-**Documentation**:
-
 .. toctree::
   :maxdepth: 2
 
@@ -13,9 +10,8 @@ Welcome to persica-cookbook's documentation!
   installation
   configuration
   userguide
-  api
   development/index
-  prd
+  prd/index
 
 
 Indices and tables

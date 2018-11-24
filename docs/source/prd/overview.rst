@@ -1,5 +1,5 @@
-Welcome to persica-cookbook's documentation!
-============================================
+Product requirements document
+=============================
 
 Title & author information
 --------------------------

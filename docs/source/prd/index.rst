@@ -6,10 +6,10 @@ Product Requirement Document
 .. toctree::
   :maxdepth: 2
 
-   overview
-   functional
-   usability
-   technical
-   environmental
-   support
-   interaction
+  overview
+  functional
+  usability
+  technical
+  environmental
+  support
+  interaction
