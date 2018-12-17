@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    {#    <link href="{% static "inspinia/css/plugins/chosen/chosen.css"  %}" rel="stylesheet">#}
+    {#    <link href="{% static "inspinia/css/style.css"  %}" rel="stylesheet">#}
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="wrapper wrapper-content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>资源总表</h5>
+                                {% if classification_id %}
+                                    <a href="{% url 'resource:ResourceCreate' classification_id %}"
+                                       class="btn btn-primary btn-xs pull-right">
+                                        Create new
+                                    </a>
+                                {% else %}
+                                    <a href="{% url 'resource:ResourceCreateIndex' %}"
+                                       class="btn btn-primary btn-xs pull-right">
+                                        Create new
+                                    </a>
+                                {% endif %}
+                            </div>
+                            <div class="ibox-content">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover dataTables-example"
+                                           id="editable">
+                                        <thead>
+                                        <tr>
+                                            <th>类型</th>
+                                            <th>名称</th>
+                                            <th>SN</th>
+                                            <th>环境</th>
+                                            <th>状态</th>
+                                            <th>到期时间</th>
+                                            <th>编辑</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for object in data %}
+                                            <tr class="gradeX">
+                                                <td>
+                                                    <a href="{% url 'resource:ResourceClassification' object.resource_type.parent.node %}">{{ object.resource_type | title }}</a>
+                                                </td>
+                                                <td>
+                                                    <a href="{{ object.get_absolute_url }}">
+                                                        {{ object.name | upper }}
+                                                    </a>
+                                                </td>
+                                                <td>{{ object.sn }}</td>
+                                                <td>{{ object.group.parent }}-{{ object.group }}</td>
+                                                {% if object.status == 0 %}
+                                                    <td><label class="label label-success">
+                                                        {{ object.get_status_display }}
+                                                    </label>
+                                                    </td>
+                                                {% elif object.status == 1 %}
+                                                    <td>
+                                                        <label class="label label-warning">
+                                                            {{ object.get_status_display }}
+                                                        </label>
+                                                    </td>
+                                                {% elif object.status == 2 %}
+                                                    <td><label
+                                                            class="label label-default">
+                                                        {{ object.get_status_display }}
+                                                    </label>
+                                                    </td>
+                                                {% elif object.status == 3 %}
+                                                    <td><label
+                                                            class="label label-danger">
+                                                        {{ object.get_status_display }}
+                                                    </label>
+                                                    </td>
+                                                {% elif object.status == 4 %}
+                                                    <td>
+                                                        <label class="label label-info">
+                                                            {{ object.get_status_display }}
+                                                        </label>
+                                                    </td>
+                                                {% endif %}
+                                                <td>{{ object.end_day }}</td>
+                                                <td>
+                                                    <a href="{% url 'resource:ResourceUpdate' object.id %}"
+                                                       class="btn btn-xs btn-success">编辑</a>
+                                                    {% if object.ips.ip_address %}
+                                                        <a href="" class="btn btn-xs btn-primary">远程联接</a>
+                                                    {% else %}
+                                                        <a href="" class="btn btn-xs btn-default">远程联接</a>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <!-- Chosen -->
+    <script src="{% static 'inspinia/js/plugins/chosen/chosen.jquery.js' %}"></script>
+    <script src="{% static 'inspinia/js/plugins/dataTables/datatables.min.js' %}"></script>
+    <script src="{% static 'inspinia/js/plugins/jeditable/jquery.jeditable.js' %}"></script>
+    <!-- resource_create -->
+
+
+    <!-- Page-Level Scripts -->
+    <script>
+        $(document).ready(function () {
+            $('.dataTables-example').DataTable({
+                dom: '<"html5buttons"B>lTfgitp',
+                buttons: [
+                    {#{extend: 'copy'},#}
+                    {#{extend: 'csv'},#}
+                    {#{extend: 'excel', title: 'ExampleFile'},#}
+                    {#{extend: 'pdf', title: 'ExampleFile'},#}
+
+                    {#{#}
+                    {#    extend: 'print',#}
+                    {#    customize: function (win) {#}
+                    {#        $(win.document.body).addClass('white-bg');#}
+                    {#        $(win.document.body).css('font-size', '10px');#}
+                    {##}
+                    {#        $(win.document.body).find('table')#}
+                    {#            .addClass('compact')#}
+                    {#            .css('font-size', 'inherit');#}
+                    {#    }#}
+                    {#}#}
+                ]
+
+            });
+
+            /* Init DataTables */
+            var oTable = $('#editable').DataTable();
+
+            /* Apply the jEditable handlers to the table */
+            oTable.$('.tedit').editable('../example_ajax.php', {
+                "callback": function (sValue, y) {
+                    var aPos = oTable.fnGetPosition(this);
+                    oTable.fnUpdate(sValue, aPos[0], aPos[1]);
+                },
+                "submitdata": function (value, settings) {
+                    return {
+                        "row_id": this.parentNode.getAttribute('id'),
+                        "column": oTable.fnGetPosition(this)[2]
+                    };
+                },
+                "width": "90%",
+                "height": "100%"
+            });
+        });
+
+        function fnClickAddRow() {
+            $('#editable').dataTable().fnAddData([
+                "Custom row",
+                "New row",
+                "New row",
+                "New row",
+                "New row"]);
+
+        }
+    </script>
+{% endblock %}

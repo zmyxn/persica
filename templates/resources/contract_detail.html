@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="wrapper wrapper-content">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        {% if object %}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <!-- 详细信息 -->
+                                    <div class="m-b-md">
+                                        <a href="{% url 'resource:ContractUpdate' object.id %}"
+                                           class="btn btn-primary btn-xs pull-right">Edit
+                                            Resource</a>
+
+                                        <h2>ID： {{ object.sn }}</h2>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- 详细信息 -->
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <dl class="dl-horizontal">
+                                        <dt>编号 :</dt>
+                                        <dd>{{ object.sn }}</dd>
+                                        <br>
+                                        <dt>合同名称 :</dt>
+                                        <dd>{{ object.name }}</dd>
+                                        <br>
+                                        <dt>金额 :</dt>
+                                        <dd>{{ object.price }}</dd>
+                                        <br>
+                                        <dt>生效日期 :</dt>
+                                        <dd>{{ object.start_day }}</dd>
+                                        <br>
+                                        <dt>失效日期 :</dt>
+                                        <dd>{{ object.end_day }}</dd>
+                                        <br>
+                                        <dt>创建日期 :</dt>
+                                        <dd>{{ object.create_date }}</dd>
+                                        <br>
+                                        <dt>更新日期 :</dt>
+                                        <dd>{{ object.update_date }}</dd>
+                                        <br>
+                                        <dt>备注 :</dt>
+                                        <dd>{{ object.memo }}</dd>
+                                        <br>
+                                        <dt>详细 :</dt>
+                                        <dd>{{ object.detail }}</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+
+{% endblock %}

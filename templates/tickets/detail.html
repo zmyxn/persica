@@ -1,0 +1,208 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="wrapper wrapper-content">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <!-- 详细信息 -->
+                                <div class="m-b-md">
+                                    <a href="project_detail.html#" class="btn btn-white btn-xs pull-right">Edit
+                                        Detail</a>
+                                    <h2><strong>唯一识别码</strong> {{ obj.sn }}</h2>
+                                </div>
+                                <dl class="dl-horizontal">
+                                    <dt>Status:</dt>
+                                    <dd>
+                                        <span class="label label-warning">{{ obj.status.name }}</span>
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <!-- 工单信息 -->
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <dl class="dl-horizontal">
+                                    <dt>类别 :</dt>
+                                    <dd>{{ obj.type.name }}</dd>
+                                    <dt>名称 :</dt>
+                                    <dd>{{ obj.name }}</dd>
+                                    <dt>创建时间 :</dt>
+                                    <dd>{{ obj.create_time }}</dd>
+                                </dl>
+                            </div>
+                            <div class="col-lg-4" id="cluster_info">
+                                <dl class="dl-horizontal">
+                                    <dt>提交人 :</dt>
+                                    <dd>{{ obj.create_user }}</dd>
+                                    <dt>处理人 :</dt>
+                                    <dd>{{ obj.update_user }}</dd>
+                                    <dt>完成时间 :</dt>
+                                    <dd>{{ obj.complete_time }}</dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <!-- 工单详细 -->
+                        <div class="row m-t-sm">
+
+                            <div class="col-lg-12">
+                                <div class="panel blank-panel">
+                                    <div class="panel-heading">
+                                        <div class="panel-options">
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="project_detail.html#tab-1"
+                                                                      data-toggle="tab">详细信息</a></li>
+                                                <li class=""><a href="project_detail.html#tab-2"
+                                                                data-toggle="tab">事件记录</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="panel-body">
+
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="tab-1">
+
+                                                {#                                                <div class="col-lg-3">#}
+                                                {#                    <div class="ibox float-e-margins">#}
+                                                {#                        <div class="ibox-content">#}
+                                                {#                            <div class="file-manager">#}
+                                                {#                                <h5>Show:</h5>#}
+                                                {#                                <a href="file_manager.html#" class="file-control active">Ale</a>#}
+                                                {#                                <a href="file_manager.html#" class="file-control">Documents</a>#}
+                                                {#                                <a href="file_manager.html#" class="file-control">Audio</a>#}
+                                                {#                                <a href="file_manager.html#" class="file-control">Images</a>#}
+                                                {#                                <div class="hr-line-dashed"></div>#}
+                                                {#                                <button class="btn btn-primary btn-block">Upload Files</button>#}
+                                                {#                                <div class="hr-line-dashed"></div>#}
+                                                {#                                <h5>Folders</h5>#}
+                                                {#                                <ul class="folder-list" style="padding: 0">#}
+                                                {#                                    <li><a href="file_manager.html"><i class="fa fa-folder"></i> Files</a></li>#}
+                                                {#                                    <li><a href="file_manager.html"><i class="fa fa-folder"></i> Pictures</a></li>#}
+                                                {#                                    <li><a href="file_manager.html"><i class="fa fa-folder"></i> Web pages</a></li>#}
+                                                {#                                    <li><a href="file_manager.html"><i class="fa fa-folder"></i> Illustrations</a></li>#}
+                                                {#                                    <li><a href="file_manager.html"><i class="fa fa-folder"></i> Films</a></li>#}
+                                                {#                                    <li><a href="file_manager.html"><i class="fa fa-folder"></i> Books</a></li>#}
+                                                {#                                </ul>#}
+                                                {#                                <h5 class="tag-title">Tags</h5>#}
+                                                {#                                <ul class="tag-list" style="padding: 0">#}
+                                                {#                                    <li><a href="file_manager.html">Family</a></li>#}
+                                                {#                                    <li><a href="file_manager.html">Work</a></li>#}
+                                                {#                                    <li><a href="file_manager.html">Home</a></li>#}
+                                                {#                                    <li><a href="file_manager.html">Children</a></li>#}
+                                                {#                                    <li><a href="file_manager.html">Holidays</a></li>#}
+                                                {#                                    <li><a href="file_manager.html">Music</a></li>#}
+                                                {#                                    <li><a href="file_manager.html">Photography</a></li>#}
+                                                {#                                    <li><a href="file_manager.html">Film</a></li>#}
+                                                {#                                </ul>#}
+                                                {#                                <div class="clearfix"></div>#}
+                                                {#                            </div>#}
+                                                {#                        </div>#}
+                                                {#                    </div>#}
+                                                {#                </div>#}
+                                                <div class="col-lg-9">
+                                                    <div class="feed-activity-list">
+                                                        {% for i in obj.deployticket_set.all %}
+                                                        <div class="feed-element">
+                                                            <div class="media-body ">
+{#                                                                <small class="pull-right">2h ago</small>#}
+                                                                <strong>{{ i.type.name }}</strong>  deploy <strong>{{ i.env.name }} - {{ i.app.parent.name }} - {{ i.app.name }} </strong> <br>
+{#                                                                <small class="text-muted">Today 2:10 pm - 12.06.2014#}
+{#                                                                </small>#}
+                                                                <div class="well">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-4">
+                                                                            <dl class="dl-horizontal">
+                                                                                <dt>Jira ticket :</dt>
+                                                                                {% if i.jira %}
+                                                                                <dd>{{ i.jira }}</dd>
+                                                                                {% else %}
+                                                                                    <dd>未记录</dd>
+                                                                                {% endif %}
+                                                                                <dt>package source :</dt>
+                                                                                <dd>{{ i.source }}</dd>
+                                                                                <dt>memo :</dt>
+                                                                                <dd>{{ i.memo }}</dd>
+                                                                            </dl>
+                                                                        </div>
+                                                                        <div class="col-lg-4">
+                                                                            <dl class="dl-horizontal">
+                                                                                <dt>构建任务号 :</dt>
+                                                                                <dd>Jenkins #{{ i.jenkins }}</dd>
+                                                                                <dt>发布任务号 :</dt>
+                                                                                <dd>task #{{ i.deplop_task }}</dd>
+                                                                                <dt>发布完成时间 :</dt>
+                                                                                <dd>fqb</dd>
+                                                                            </dl>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {% endfor %}
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="tab-2">
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>记录类型</th>
+                                                        <th>处理人</th>
+                                                        <th>更新日期</th>
+                                                        <th>更新内容</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% if obj.eventlog_set.all %}
+                                                        {% for event in obj.eventlog_set.all %}
+                                                            <tr>
+                                                                <td>{{ event.get_event_type_display }}
+                                                                </td>
+                                                                <td>
+                                                                    {{ event.user | title }}
+                                                                </td>
+                                                                <td>
+                                                                    {{ event.date }}
+                                                                </td>
+                                                                <td>
+                                                                    <p class="small">
+                                                                        {{ event.detail }}
+                                                                    </p>
+                                                                </td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+{% endblock %}

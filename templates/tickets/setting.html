@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <!-- Morris -->
+    <link href="{% static "inspinia/css/plugins/jsTree/style.min.css" %}" rel="stylesheet">
+
+{% endblock %}
+{% block content %}
+    <div class="wrapper wrapper-content">
+        <div class="row">
+
+            <div class="col-lg-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>JSON example{{ data }}</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div id="tree_json"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+{% endblock %}
+{% block script %}
+    <script src="{% static "inspinia/js/plugins/jsTree/jstree.min.js" %}"></script>
+
+    <style>
+        .jstree-open > .jstree-anchor > .fa-folder:before {
+            content: "\f07c";
+        }
+
+        .jstree-default .jstree-icon.none {
+            width: 0;
+        }
+    </style>
+    <script>
+        var Dict = {{ object|safe }};
+
+        $(document).ready(function () {
+            $('#tree_json').jstree({
+                'core': {
+                    'data': Dict,
+                    "animation": 0,
+                    "check_callback": true,
+                    "themes": {"stripes": true},
+                },
+                "plugins": ["state", "wholerow", "contextmenu", "types", "dnd"],
+                'state': {
+                    "opened": true,
+                },
+
+            });
+
+        });
+
+
+    </script>
+{% endblock %}

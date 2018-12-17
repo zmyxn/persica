@@ -1,0 +1,78 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>blue | Login </title>
+
+    <link href="{% static "inspinia/css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "inspinia/font-awesome/css/font-awesome.css" %}" rel="stylesheet">
+
+    <link href="{% static "inspinia/css/animate.css" %}" rel="stylesheet">
+    <link href="{% static "inspinia/css/style.css" %}" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+
+    <div class="loginColumns animated fadeInDown">
+        <div class="row">
+
+            <div class="col-md-6">
+                <h2 class="font-bold">Welcome to Hive</h2>
+
+                <p>
+                    We are bee.
+                </p>
+
+
+
+{#                <p>#}
+{#                    <li><a href="http://gitlab.bwt18.com" target="_blank">Gitlab  代码管理系统</a></li>#}
+{#                    <li><a href="http://Jira.bwt18.com" target="_blank">Jira      BUG管理系统</a></li>#}
+{#                    <li><a href="http://10.21.99.226:8090" target="_blank">Confluence 知识管理系统 </a></li>#}
+{#                    <li><a href="http://jenkins.bwt18.com" target="_blank">Jenkins   持续集成</a></li>#}
+{##}
+{#                </p>#}
+
+            </div>
+            <div class="col-md-6">
+                <div class="ibox-content">
+                    <form class="m-t" role="form" action="{% url 'accounts:login' %}" method="POST">
+                        {% for field in login_form %}
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label class="control-label">{{ field.label_tag }}</label>
+
+                                {{ field }}
+
+                                {{ field.errors }}
+                            </div>
+                        {% endfor %}
+                        <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+
+                    </form>
+                    <p class="m-t">
+                        <small><a href="http://jenkins.bwt18.com" target="_blank"> 忘记密码?</a></small>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-6">
+                嗡， 嗡嗡， 嗡嗡嗡
+            </div>
+            <div class="col-md-6 text-right">
+               <small>© Now - Forever</small>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

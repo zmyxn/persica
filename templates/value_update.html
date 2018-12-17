@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block head %}
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="wrapper wrapper-content">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <!-- 详细信息 -->
+                                <form class="form-horizontal" action="" method="POST">
+                                    {% csrf_token %}
+                                    {% for field in form %}
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label">{{ field.label_tag }}</label>
+                                            <div class="col-lg-6">{{ field |add_class:'form-control' }}</div>
+                                            <div class="col-lg-offset-3 col-lg-10">{{ field.errors }}</div>
+                                        </div>
+                                    {% endfor %}
+                                    {% for field in ext_form %}
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label">{{ field.label_tag }}</label>
+                                            <div class="col-lg-6">{{ field |add_class:'form-control' }}</div>
+                                            <div class="col-lg-offset-3 col-lg-10">{{ field.errors }}</div>
+                                        </div>
+                                    {% endfor %}
+                                    <div class="form-group">
+                                        <div class="col-lg-offset-2 col-lg-10">
+                                            <button class="btn btn-white" type="submit" value="Update">
+                                                Submit
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+{% endblock %}

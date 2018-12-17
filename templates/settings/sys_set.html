@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <!-- Morris -->
+    <link href="{% static "inspinia/css/plugins/jsTree/style.min.css" %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <div class="wrapper wrapper-content animated fadeIn">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="tabs-container">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#tab-1"> 组织架构</a></li>
+                        <li class=""><a data-toggle="tab" href="#tab-2">环境建设</a></li>
+                        <li class=""><a data-toggle="tab" href="#tab-3">项目架构</a></li>
+                        <li class=""><a data-toggle="tab" href="#tab-4">完整大树</a></li>
+                    </ul>
+                    <div class="tab-content ">
+                        <div id="tab-1" class="tab-pane active">
+                            <div class="panel-body">
+                                <div class="row">
+                                    {% if data.org_tree %}
+                                        <div class="col-lg-4">
+                                            <div class="ibox-content">
+                                                <div id="org_tree"></div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-2" class="tab-pane">
+                            <div class="panel-body">
+                                <div class="row">
+                                    {% if data.env_tree %}
+                                        <div class="col-lg-4">
+                                            <div class="ibox-content">
+                                                <div id="env_tree"></div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-3" class="tab-pane">
+                            <div class="panel-body">
+                                <div class="row">
+                                    {% if data.pro_tree %}
+                                        <div class="col-lg-4">
+                                            <div class="ibox-content">
+                                                <div id="pro_tree"></div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-4" class="tab-pane">
+                            <div class="panel-body">
+                                <div class="row">
+                                    {% if data.all_tree %}
+                                        <div class="col-lg-4">
+                                            <div class="ibox-content">
+                                                <div id="all_tree"></div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block script %}
+    <script src="{% static "inspinia/js/plugins/jsTree/jstree.min.js" %}"></script>
+
+    <style>
+        .jstree-open > .jstree-anchor > .fa-folder:before {
+            content: "\f07c";
+        }
+
+        .jstree-default .jstree-icon.none {
+            width: 0;
+        }
+    </style>
+    <script>
+        var Dict = {{ data | safe }};
+
+        $(document).ready(function () {
+            $('#all_tree').jstree({
+                'core': {
+                    'data': Dict["all_tree"],
+                    "animation": 0,
+                    "check_callback": true,
+                    "themes": {"stripes": true},
+                },
+                "plugins": ["state", "wholerow", "contextmenu", "types", "dnd"],
+                'state': {
+                    "opened": true,
+                },
+
+            });
+
+            $('#org_tree').jstree({
+                'core': {
+                    'data': Dict["org_tree"],
+                    "animation": 0,
+                    "check_callback": true,
+                    "themes": {"stripes": true},
+                },
+                "plugins": ["state", "wholerow", "contextmenu", "types", "dnd"],
+                'state': {
+                    "opened": true,
+                },
+
+            });
+
+
+            $('#env_tree').jstree({
+                'core': {
+                    'data': Dict["env_tree"],
+                    "animation": 0,
+                    "check_callback": true,
+                    "themes": {"stripes": true},
+                },
+                "plugins": ["state", "wholerow", "contextmenu", "types", "dnd"],
+                'state': {
+                    "opened": true,
+                },
+
+            });
+
+            $('#pro_tree').jstree({
+                'core': {
+                    'data': Dict["pro_tree"],
+                    "animation": 0,
+                    "check_callback": true,
+                    "themes": {"stripes": true},
+                },
+                "plugins": ["state", "wholerow", "contextmenu", "types", "dnd"],
+                'state': {
+                    "opened": true,
+                },
+
+            });
+
+
+        });
+
+
+    </script>
+{% endblock %}

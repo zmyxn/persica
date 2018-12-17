@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="wrapper wrapper-content">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        {% if object %}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <!-- 详细信息 -->
+                                    <div class="m-b-md">
+                                        <a href="{% url 'accounts:RoleUpdate' object.id %}"
+                                           class="btn btn-primary btn-xs pull-right">Edit
+                                            Resource</a>
+                                        <h2>ID： {{ object.id }}</h2>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- 详细信息 -->
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <dl class="dl-horizontal">
+                                        <dt>名称 :</dt>
+                                        <dd>{{ object.name }}</dd>
+                                        <dt>权限 :</dt>
+                                        <dd>
+                                            {% for permission in object.permissions.all %}
+                                                {{ permission }}<br>
+                                            {% endfor %}
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+{% endblock %}

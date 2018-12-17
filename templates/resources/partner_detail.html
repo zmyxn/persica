@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="wrapper wrapper-content">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        {% if object %}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <!-- 详细信息 -->
+                                    <div class="m-b-md">
+                                        <a href="{% url 'resource:PartnerUpdate' object.id %}"
+                                           class="btn btn-primary btn-xs pull-right">Edit
+                                            Resource</a>
+                                        <h2>{{ object.id }} - {{ object.name }} </h2>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- 详细信息 -->
+                            <div class="row">
+                            <div class="col-lg-4">
+                                    <dl class="dl-horizontal">
+                                        <dt>管理中心:</dt>
+                                        <dd> {{ object.website }}</dd>
+                                        <br>
+                                        <dt>管理帐号:</dt>
+                                        <dd> {{ object.website_username }}</dd>
+                                        <br>
+                                        <dt>管理密码:</dt>
+                                        <dd> {{ object.website_password }}</dd>
+                                        <br>
+                                        <dt>管理token:</dt>
+                                        <dd> {{ object.website_token }}</dd>
+                                        <br>
+                                        <dt>管理secret:</dt>
+                                        <dd> {{ object.website_secret }}</dd>
+                                        <br>
+                                        <dt>电话中心 :</dt>
+                                        <dd>{{ object.telephone }}</dd>
+                                        <br>
+                                        <dt>联络:</dt>
+                                        <dd> {{ object.webchat }}</dd>
+                                        <br>
+                                        <dt>介绍:</dt>
+                                        <dd>  {{ object.memo }} </dd>
+                                        <br>
+                                    </dl>
+                            </div>
+                                <div class="col-lg-4">
+                                    <dl class="dl-horizontal">
+                                        <dt>收款帐号:</dt>
+                                        <dd> {{ object.bank_account }}</dd>
+                                        <br>
+                                        <dt>帐号名称:</dt>
+                                        <dd> {{ object.bank_name }}</dd>
+                                        <br>
+                                        <dt>开户行:</dt>
+                                        <dd>{{ object.bank_opening }}</dd>
+                                        <br>
+                                        <dt>支付宝:</dt>
+                                        <dd> {{ object.alipay_account }}</dd>
+                                        <br>
+                                        <dt>支付宝识别信息:</dt>
+                                        <dd>{{ object.alipay_auth_info }}</dd>
+                                        <br>
+                                    </dl>
+                            </div>
+
+                                <div class="col-lg-4">
+                                    <dl class="dl-horizontal">
+                                        <dt>联系人:</dt>
+                                        <dd> {{ object.contact_name }} </dd>
+                                        <br>
+                                        <dt>QQ:</dt>
+                                        <dd> {{ object.contact_qq }}</dd>
+                                        <br>
+                                        <dt>Telephone</dt>
+                                        <dd> {{ object.contact_telephone }}</dd>
+                                        <br>
+                                        <dt>E-mail</dt>
+                                        <dd> {{ object.contact_email }}</dd>
+                                        <br>
+                                        <dt>Wechat</dt>
+                                        <dd> {{ object.contact_wechat }}</dd>
+                                        <br>
+                                        <dt>Skype</dt>
+                                        <dd> {{ object.contact_skype }}</dd>
+                                        <br>
+                                        <dt>WhatsApp</dt>
+                                        <dd> {{ object.contact_whatsapp }}</dd>
+                                        <br>
+                                        <dt>Telegram</dt>
+                                        <dd> {{ object.contact_telegram }}</dd>
+                                        <br>
+                                    </dl>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="row">
+        <div class="col-lg-12">
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+
+{% endblock %}

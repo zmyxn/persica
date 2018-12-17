@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Bluehat | Dashboard</title>
+
+    <link href="{% static "inspinia/css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "inspinia/font-awesome/css/font-awesome.css" %}" rel="stylesheet">
+
+    <!-- Toastr style -->
+    <link href="{% static "inspinia/css/plugins/toastr/toastr.min.css" %}" rel="stylesheet">
+
+    <!-- Gritter -->
+    <link href="{% static "inspinia/js/plugins/gritter/jquery.gritter.css" %}" rel="stylesheet">
+
+    <link href="{% static "inspinia/css/animate.css" %}" rel="stylesheet">
+    <link href="{% static "inspinia/css/style.css" %}" rel="stylesheet">
+
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            {% include '_left_side_bar.html' %}
+        </div>
+    </nav>
+    <div id="page-wrapper" class="gray-bg ">
+        <div class="row border-bottom">
+            {% include '_header_bar.html' %}
+        </div>
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h4></h4>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="{% url 'index' %}">Home</a>
+                    </li>
+                    {% for list in app_path %}
+                        <li>
+                            <a href="">{{ list | title }}</a>
+                        </li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+        {% block content %}{% endblock %}
+    </div>
+</div>
+{% include '_foot_js.html' %}
+{% block script %}{% endblock %}
+</body>
+</html>

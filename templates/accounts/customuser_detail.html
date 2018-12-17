@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="wrapper wrapper-content">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        {% if object %}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <!-- 详细信息 -->
+                                    <div class="m-b-md">
+                                        <a href="{% url 'accounts:UserUpdate' object.id %}"
+                                           class="btn btn-primary btn-xs pull-right">Edit
+                                            Resource</a>
+                                        <h2>ID： {{ object.id }}</h2>
+                                    </div>
+                                    <dl class="dl-horizontal">
+                                        <dt>Status:</dt>
+                                        <dd>
+                                            {% if object.is_active %}
+                                                <span class="label label-success">{{ object.is_active }}</span>
+                                            {% else %}
+                                                <span class="label label-warning">{{ object.is_active }}</span>
+                                            {% endif %}
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <!-- 资源固有信息 -->
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <dl class="dl-horizontal">
+                                        <dt>名称 :</dt>
+                                        <dd>{{ object.username }}</dd>
+                                        <dt>组织 :</dt>
+                                        <dd>{{ object.department }}</dd>
+                                        <dt>职务等级 :</dt>
+                                        <dd>{{ object.position }}</dd>
+                                    </dl>
+                                </div>
+                                <div class="col-lg-4" id="cluster_info">
+                                    <dl class="dl-horizontal">
+                                        <dt>工作机 :</dt>
+                                        <dd>{{ object.work_phone }}</dd>
+                                        <dt>邮箱 :</dt>
+                                        <dd><a href="" class="text-navy"> {{ object.email }}</a></dd>
+                                        <dt>最后登入时间 :</dt>
+                                        <dd>{{ object.last_login }}</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <!-- 资源独有信息 -->
+                            <div class="row m-t-sm">
+                                <div class="col-lg-12">
+                                    <div class="panel blank-panel">
+                                        <div class="panel-heading">
+                                            <div class="panel-options">
+                                                <ul class="nav nav-tabs">
+                                                    <li class="active">
+                                                        <a href="#tab-1" data-toggle="tab">详细信息</a></li>
+                                                    <li class="">
+                                                        <a href="#tab-2" data-toggle="tab">权限列表</a></li>
+                                                    <li class="">
+                                                        <a href="#tab-3" data-toggle="tab">变更记录</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="tab-1">
+                                                    <div class="col-lg-4">
+                                                        <!--  详细信息 -->
+                                                        <dl class="dl-horizontal">
+                                                            <dt>入职时间 <br> Registrant E-mail</dt>
+                                                            <dd>{{ object.entry_date }}</dd>
+                                                            <dt>转正时间 <br> Registration Date</dt>
+                                                            <dd></dd>
+                                                            <br>
+                                                            <dt>工签状态 <br> Domain Status</dt>
+                                                            <dd>{{ object.visa_status }}</dd>
+                                                            <dt>工签申请时间 <br> Domain Status</dt>
+                                                            <dd>{{ object.visa_issue_date }}</dd>
+                                                            <dt>工签到期时间 <br> Name Server</dt>
+                                                            <dd>{{ object.visa_expir_date }}</dd>
+                                                            <br>
+                                                            <dt>回国报销类型<br> Type</dt>
+                                                            <dd>{{ object.reimbursement }}</dd>
+                                                            <br>
+                                                            <dt>大楼ID名称 <br> Power</dt>
+                                                            <dd>{{ object.rfid_name }}</dd>
+                                                            <dt>大楼ID <br> Power</dt>
+                                                            <dd>{{ object.rfid }}</dd>
+                                                            <br>
+                                                        </dl>
+                                                    </div>
+                                                    <div class="dl-horizontal">
+                                                        <h5>归属角色</h5>
+
+                                                    </div>
+                                                </div>
+                                            <div class="tab-pane" id="tab-2">
+                                                    <div class="col-lg-4">
+                                                        <!--  权限清单 -->
+                                                        <dl class="dl-horizontal">
+                                                            <dt>可控组织 <br> </dt>
+                                                            <dd></dd>
+                                                            <dt>合同管理 <br> </dt>
+                                                            <dd></dd>
+                                                            <br>
+                                                            <dt>资产管理 <br> </dt>
+                                                            <dd></dd>
+                                                            <dt>工单管理 <br> </dt>
+                                                            <dd></dd>
+                                                            <dt>任务管理 <br> </dt>
+                                                            <dd></dd>
+                                                            <br>
+                                                            <dt>发布管理<br> </dt>
+                                                            <dd></dd>
+                                                            <br>
+                                                            <dt>远程控制 <br> </dt>
+                                                            <dd></dd>
+                                                            <dt>用记管理 <br> </dt>
+                                                            <dd></dd>
+                                                            <br>
+                                                        </dl>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane" id="tab-3">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>记录类型</th>
+                                                            <th>处理人</th>
+                                                            <th>更新日期</th>
+                                                            <th>更新内容</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        {% if object.eventlog_set.all %}
+                                                            {% for event in object.eventlog_set.all %}
+                                                                <tr>
+                                                                    <td>{{ event.get_event_type_display }}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{ event.user | title }}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{ event.date }}
+                                                                    </td>
+                                                                    <td>
+                                                                        <p class="small">
+                                                                            {{ event.detail }}
+                                                                        </p>
+                                                                    </td>
+                                                                </tr>
+                                                            {% endfor %}
+                                                        {% endif %}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+{% endblock %}

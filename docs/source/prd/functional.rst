@@ -7,7 +7,7 @@ Resource Manage System
 单品分析
 ~~~~~~~~~~~~~~
 
-.. image:: _static/ResourceUML.png
+.. image:: image/ResourceUML.png
 
 Manage Context
 ~~~~~~~~~~~~~~
@@ -42,12 +42,5 @@ Component
 
 - 合同
 - 供应商
-
-Manage User
-~~~~~~~~~~~~
-
-- 财务管理人员
-- 行政管理人员
-- 设备使用人员
 
 
