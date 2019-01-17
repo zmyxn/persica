@@ -1,0 +1,1 @@
+default_app_config = 'apps.funds.apps.FundsConfig'
