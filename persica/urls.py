@@ -18,9 +18,12 @@ from django.contrib import admin
 from django.urls import path
 from .views import IndexView
 
+
 urlpatterns = [
     url('admin/', admin.site.urls),
     url(r'^$', IndexView.as_view(), name='index'),
-    url(r'^accounts/', include('accounts.urls', namespace='accounts')),
-    url(r'^resource/', include('resources.urls', namespace='resource')),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^accounts/', include('apps.accounts.urls', namespace='accounts')),
+    url(r'^common/', include('apps.common.urls', namespace='common')),
+    url(r'^funds/', include('apps.funds.urls', namespace='funds')),
 ]

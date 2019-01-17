@@ -13,11 +13,11 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 import logging
 import pymysql
+
 pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
@@ -28,8 +28,7 @@ SECRET_KEY = 'l#+^or#0ed-q0jl!!as@i19x4=jo(k6+u!^08j(=g_9q&r8hco'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['192.168.0.23','127.0.0.1']
 
 # Application definition
 
@@ -42,9 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'guardian',
     'widget_tweaks',
-    'accounts',
-    'core',
-    'resources'
+    'rest_framework',
+    'apps.accounts',
+    'apps.funds',
+    'apps.common',
 ]
 
 MIDDLEWARE = [
@@ -59,7 +59,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'persica.urls'
 
-AUTH_USER_MODEL = 'accounts.CustomUser'
+# AUTH_USER_MODEL = 'accounts.CustomUser'
 
 TEMPLATES = [
     {
@@ -80,7 +80,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'persica.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
@@ -94,7 +93,6 @@ DATABASES = {
         'PORT': '3306',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -114,7 +112,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
@@ -128,7 +125,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
@@ -138,7 +134,6 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
     (os.path.join(STATIC_ROOT, 'images').replace('\\', '/')),
 )
-
 
 # Logging file
 LOGGING = {
@@ -176,3 +171,9 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'guardian.backends.ObjectPermissionBackend'
 )
+
+REST_FRAMEWORK = {
+
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
