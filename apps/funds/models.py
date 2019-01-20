@@ -27,7 +27,7 @@ class CapitalFlow(models.Model):
     )
     name = models.CharField(max_length=128, verbose_name="标题")
     date = models.DateField(max_length=30, blank=True, null=True, verbose_name="交易时间")
-    amount = models.IntegerField(verbose_name="金额")
+    amount = models.FloatField(verbose_name="金额")
     currency = models.SmallIntegerField(choices=__currency__, default=0, verbose_name="货币类别")
     created = models.DateField(auto_now_add=True, null=True, blank=True, verbose_name="记录创建时间")
     updated = models.DateField(auto_now=True, null=True, blank=True, verbose_name="记录更新时间")
